@@ -11,7 +11,19 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('home');
-});
+Route::get('/', 'HomeController@showHome');
+
+Route::get('signin', 'AuthController@showSignIn');
+Route::post('signin', 'AuthController@signIn');
+
+Route::post('login', 'AuthController@login');
+Route::get('logout', 'AuthController@logout');
+
+Route::get('shop', 'ShoppingController@showShop');
+Route::get('cart', 'ShoppingController@showCart');
+
+Route::get('additem/{id}', 'ShoppingController@addItem');
+Route::get('process', 'ShoppingController@process');
+
+
+

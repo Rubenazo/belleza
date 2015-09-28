@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title>{{ $title }}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,11 +24,19 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <nav class="light-blue lighten-1" role="navigation">
-            <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <nav class="grey darken-4" role="navigation">
+            <div class="nav-wrapper container">
+                {{ HTML::link('/','Logo', array('id'=>'logo-container', 'class'=>'brand-logo')) }}
+                
                 <ul class="right hide-on-med-and-down">
-                    <li><a class="waves-effect modal-trigger" href="#login">Login</a></li>
-                    <li><a class="waves-effect" href="">Sign in</a></li>
+                    <li><a class="waves-effect waves-light" href="shop">Tienda</a></li>
+                    @if ( ! Auth::check() )
+                        <li><a class="waves-effect waves-light modal-trigger" href="#login">Login</a></li>
+                        <li><a class="waves-effect waves-light" href="signin">Sign in</a></li>
+                    @else
+                        <li><a class="waves-effect waves-light" href="logout">Logout</a></li>
+                        <li><a class="waves-effect waves-light" href="cart"><i class="material-icons">shopping_cart</i></a></li>
+                    @endif
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav">
@@ -39,13 +47,40 @@
             </div>
         </nav>
 
+        @if ( ! Auth::check() )
+            <div id="login" class="modal">
+                <div class="modal-content">
+                    <h4>Login</h4>
+                    {{ Form::open(array('url' => 'login')) }}
+                        <div class="input-field">
+                            <input name="username" type="text" class="validate">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                        <button class="btn waves-effect waves-light" type="submit">Login
+                            <i class="material-icons right">send</i>
+                        </button>
+                    {{ Form::close() }}
+                    @if ( Session::has('error') )
+                        <h1>pizza</h1>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+        @endif
+
         @yield('content')
 
-        <footer class="page-footer orange">
+        <footer class="page-footer red darken-4">
             <div class="footer-copyright">
-                <div class="container">
-                    Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-                </div>
+                @if ( Auth::check() )
+                    <h6>Hello {{ Auth::user()->username }}</h6>
+                @endif
             </div>
         </footer>
 

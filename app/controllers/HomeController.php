@@ -15,9 +15,11 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function showHome()
 	{
-		return View::make('hello');
+		$title = 'Home';
+		return View::make('home')
+		->with('title', $title);
 	}
 
 }
