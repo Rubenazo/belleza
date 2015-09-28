@@ -4,21 +4,25 @@
 
 <div class="container">
 
-	<h1>Carrito</h1>
+	<h3>Carrito</h3>
 	
 	<table>
-		<tr>
-			<th>Producto</th>
-			<th>Cantidad</th>
-			<th>Total a pagar</th>
-		</tr>
-		@foreach(Cart::content() as $item)
+		<thead>
 			<tr>
-				<td>{{ $item['name'] }}</td>
-				<td>{{ $item['qty'] }}</td>
-				<td>{{ $item['price'] * $item['qty'] }} Bs</td>
+				<th>Producto</th>
+				<th>Cantidad</th>
+				<th>Total a pagar</th>
 			</tr>
-		@endforeach
+		</thead>
+		<tbody>
+			@foreach(Cart::content() as $item)
+				<tr>
+					<td data-field="nombre">{{ $item['name'] }}</td>
+					<td data-field="cantidad">{{ $item['qty'] }}</td>
+					<td data-field="precio">{{ $item['price'] * $item['qty'] }} Bs</td>
+				</tr>
+			@endforeach
+		</tbody>
 	</table>
 
 	<a class="btn waves-effect waves-light" href="process">Procesar
@@ -26,7 +30,7 @@
     </a>
 
     @if ( Session::has('error') )
-        <h1>{{ Session::get('error') }}</h1>
+        <p>{{ Session::get('error') }}</p>
     @endif
 
 </div>

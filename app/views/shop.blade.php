@@ -4,18 +4,20 @@
 
 <div class="container">
 
-	<h1>Carrito</h1>
+	<h3>Tienda</h3>
 
-	<table>
-		<tr>
-			@foreach($items as $item)
-				<td>
-					<a href="{{URL::to('additem/'.$item->id)}}">{{ $item->nombre }}</a>
-				</td>
-			@endforeach
-		</tr>
-	</table>
+	<ul class="collection">
+		@foreach($items as $item)
+        	<li class="collection-item">
+        		<div>
+        			<img src="{{'img/'. $item->imagen .'.jpg'}}">
+        			<a href="{{URL::to('additem/'.$item->id)}}">{{ $item->nombre }}</a>
+        		</div>
+        	</li>
+		@endforeach
+    </ul>
 
 </div>
 
 @stop
+

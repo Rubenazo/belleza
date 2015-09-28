@@ -76,10 +76,10 @@
 
         @yield('content')
 
-        <footer class="page-footer red darken-4">
-            <div class="footer-copyright">
+        <footer class="page-footer grey darken-4 white-text">
+            <div class="container">
                 @if ( Auth::check() )
-                    <h6>Hello {{ Auth::user()->username }}</h6>
+                    <h6>Hola {{ Auth::user()->username }}</h6>
                 @endif
             </div>
         </footer>

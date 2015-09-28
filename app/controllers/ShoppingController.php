@@ -36,6 +36,10 @@ class ShoppingController extends BaseController {
 				Session::flash('error', 'El item ' . $item['name'] . ' se ha agotado');
 				return Redirect::back();
 			}
+			if ( Item::find($item['id'])->stock - $item['qty'] < 0 ) {
+				Session::flash('error', 'No hay suficiente stock del item ' . $item['name'] . ' para cubrir su pedido');
+				return Redirect::back();
+			}
 		}
 		
 		if ($factura->save()) {
