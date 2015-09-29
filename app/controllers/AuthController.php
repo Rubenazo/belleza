@@ -4,9 +4,13 @@ class AuthController extends BaseController {
 
 	public function showSignIn() 
 	{
-		$title = 'Sign In';
+		$title      = 'Sign In';
+		$estados    = Estado::all();
+		$sucursales = Sucursal::all(); 
 		return View::make('signin')
-		->with('title', $title);
+		->with('title', $title)
+		->with('estados', $estados)
+		->with('sucursales', $sucursales);
 	}
 
 	public function signIn() 
